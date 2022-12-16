@@ -14,3 +14,5 @@ function add(): number {
 function total(a: number, b: number): number {
   return a + b;
 }
+total(10, 20); // 30
+total(10, 20, 30, 40);
