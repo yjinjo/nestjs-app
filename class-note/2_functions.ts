@@ -15,4 +15,8 @@ function total(a: number, b: number): number {
   return a + b;
 }
 total(10, 20); // 30
-total(10, 20, 30, 40);
+
+// 함수의 optional parameter
+function log(a: string, b?: string) {}
+log('hello world');
+log('hello ts', 'abc');
