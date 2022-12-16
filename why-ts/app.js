@@ -30,9 +30,7 @@ function fetchUser() {
   return axios.get(url);
 }
 
-fetchUser().then(function (response) {
-  response.address.
-});
+fetchUser().then(function (response) {});
 
 function startApp() {
   // axios
