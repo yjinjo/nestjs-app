@@ -25,4 +25,12 @@ function logNumber3(num: number) {
 }
 logText3('a');
 logNumber3(10);
-logText3(true);
+
+function logText4(text: string | number) {
+  console.log(text);
+  return text;
+}
+
+const a = logText4('a');
+a.split('');
+logText4(10);
