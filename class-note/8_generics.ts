@@ -32,5 +32,14 @@ function logText4(text: string | number) {
 }
 
 const a = logText4('a');
-a.split('');
+// a.split('');
 logText4(10);
+
+function logText5<T>(text: T): T {
+  console.log(text);
+  return text;
+}
+const str = logText5<string>('abc');
+str.split('');
+
+const login = logText5<boolean>(true);
