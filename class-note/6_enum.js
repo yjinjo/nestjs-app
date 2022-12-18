@@ -5,3 +5,21 @@ var Shoes;
 })(Shoes || (Shoes = {}));
 var myShoes = Shoes.Nike;
 console.log(myShoes); // '나이키'
+var Answer;
+(function (Answer) {
+    Answer["Yes"] = "Y";
+    Answer["No"] = "N";
+})(Answer || (Answer = {}));
+// 예제
+function askQuestion(answer) {
+    if (answer === Answer.Yes) {
+        console.log('정답입니다');
+    }
+    else {
+        console.log('오답입니다.');
+    }
+}
+askQuestion(Answer.Yes);
+// askQuestion('yes');
+// askQuestion('y');
+// askQuestion('예스');
