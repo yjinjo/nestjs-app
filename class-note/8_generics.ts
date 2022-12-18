@@ -13,3 +13,16 @@ function logText2<T>(text: T): T {
 logText2<string>('하이');
 logText2<number>(10);
 logText2<boolean>(true);
+
+function logText3(text: string) {
+  console.log(text);
+  // text.split('').reverse().join('');
+  return text;
+}
+function logNumber3(num: number) {
+  console.log(num);
+  return num;
+}
+logText3('a');
+logNumber3(10);
+logText3(true);
