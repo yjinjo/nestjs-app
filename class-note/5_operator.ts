@@ -33,3 +33,12 @@ function askSomeone(someone: Developer | Person) {
   // someone.skill;
   // someone.age;
 }
+
+let capt: string & number & boolean;
+
+function askSomeone2(someone: Developer & Person) {
+  someone.
+  // someone.name;
+  // someone.skill;
+  // someone.age;
+}
