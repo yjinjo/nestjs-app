@@ -34,11 +34,15 @@ function askSomeone(someone: Developer | Person) {
   // someone.age;
 }
 
+askSomeone({ name: 'Developer', skill: '웹 개발' });
+askSomeone({ name: '캡틴', age: 100 });
+
 let capt: string & number & boolean;
 
 function askSomeone2(someone: Developer & Person) {
-  someone.
-  // someone.name;
-  // someone.skill;
-  // someone.age;
+  someone.name;
+  someone.skill;
+  someone.age;
 }
+
+askSomeone2({ name: 'Developer', skill: '웹 개발', age: 100 });
