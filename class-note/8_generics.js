@@ -49,9 +49,15 @@ function logTextLength(text) {
 }
 logTextLength(['hi']);
 function logTextLength2(text) {
-    console.log(text.length);
+    text.length;
     return text;
 }
-logTextLength2('a'); // a
+logTextLength2('a');
 // logTextLength2(10);
-logTextLength2({ length: 10 }); // { length: 10 }
+logTextLength2({ length: 10 });
+function getShoppingItemOption(itemOption) {
+    return itemOption;
+}
+// getShoppingItemOption(10);
+// getShoppingItemOption<string>('a');
+getShoppingItemOption({ name: 'a', price: 10, stock: 100 });
