@@ -70,12 +70,12 @@ class AddressBook {
   }
 
   /* TODO: 아래 함수들의 파라미터 타입과 반환 타입을 지정해보세요 */
-  findContactByName(name) {
-    return this.contacts.filter((contact) => contact.name === name);
+  findContactByName(name: string): Contact[] {
+    return this.contacts.filter(contact => contact.name === name);
   }
 
-  findContactByAddress(address): {
-    return this.contacts.filter((contact) => contact.address === address);
+  findContactByAddress(address: string): Contact[] {
+    return this.contacts.filter(contact => contact.address === address);
   }
 
   // home, office, studio
@@ -91,11 +91,11 @@ class AddressBook {
   }
 
   displayListByName() {
-    return this.contacts.map((contact) => contact.name);
+    return this.contacts.map(contact => contact.name);
   }
 
   displayListByAddress() {
-    return this.contacts.map((contact) => contact.address);
+    return this.contacts.map(contact => contact.address);
   }
   /* ------------------------------------------------ */
 }
