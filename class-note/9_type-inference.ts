@@ -31,3 +31,6 @@ let detailedItem: DetailedDropdown2<number> = {
   value: 'a',
   tag: 'a',
 };
+
+// Best Common Type
+let arr = [1, 2, true, 'a'];
