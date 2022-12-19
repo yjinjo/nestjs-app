@@ -10,6 +10,12 @@ interface Contact {
   phones: PhoneNumberDictionary;
 }
 
+enum PhoneType {
+  Home = 'home',
+  Office = 'office',
+  Studio = 'studio',
+}
+
 // api
 // TODO: 아래 함수의 반환 타입을 지정해보세요.
 function fetchContacts(): Promise<Contact[]> {
@@ -49,7 +55,7 @@ function fetchContacts(): Promise<Contact[]> {
       },
     },
   ];
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => resolve(contacts), 2000);
   });
 }
@@ -78,15 +84,15 @@ class AddressBook {
     return this.contacts.filter(contact => contact.address === address);
   }
 
-  // home, office, studio
-  findContactByPhone(phoneNumber, phoneType: string) {
+  // phoneType could be home, office, studio
+  findContactByPhone(phoneNumber: number, phoneType: PhoneType): Contact[] {
     return this.contacts.filter(
-      (contact) => contact.phones[phoneType].num === phoneNumber
+      contact => contact.phones[phoneType].num === phoneNumber
     );
   }
   // findContactByPhone('officce');
 
-  addContact(contact) {
+  addContact(contact: Contact): void {
     this.contacts.push(contact);
   }
 
