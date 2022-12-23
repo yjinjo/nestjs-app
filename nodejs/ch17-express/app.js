@@ -1,9 +1,10 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 
 app.set('port', process.env.PORT || 3000); // 서버에 속성을 심음; port에 3000번
 app.get('/', (req, res) => {
-  res.send('hello express');
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.post('/', (req, res) => {
