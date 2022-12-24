@@ -1,18 +1,32 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
-const app = express();
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
+// const multer = require('multer');
 
+const app = express();
 app.set('port', process.env.PORT || 3000); // 서버에 속성을 심음; port에 3000번
 
 app.use(morgan('dev'));
+app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(cookieParser('zerochopassword'));
+app.use(
+  session({
+    resave: false,
+    saveUnintialized: false,
+    secret: 'zerochopassword',
+    cookie: {
+      httpOnly: true,
+    },
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(multer().array());
 
 app.get('/', (req, res) => {
-  req.body;
+  req.session.id = 'hello';
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
