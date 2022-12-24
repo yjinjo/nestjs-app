@@ -3,13 +3,14 @@ const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-// const multer = require('multer');
 
 const app = express();
-app.set('port', process.env.PORT || 3000); // 서버에 속성을 심음; port에 3000번
+app.set('port', process.env.PORT || 3000);
 
 app.use(morgan('dev'));
 app.use('/', express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser('zerochopassword'));
 app.use(
   session({
@@ -18,29 +19,54 @@ app.use(
     secret: 'zerochopassword',
     cookie: {
       httpOnly: true,
+      secure: false,
     },
+    name: 'sessio-cookie',
   })
 );
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// app.use(multer().array());
 
-app.get('/', (req, res) => {
-  req.session.id = 'hello';
-  res.sendFile(path.join(__dirname, 'index.html'));
+const multer = require('multer');
+const fs = require('fs');
+
+try {
+  fs.readdirSync('uploads');
+} catch (error) {
+  console.error('uploads 폴더가 없어 uploads 폴더를 생성합니다.');
+  fs.mkdirSync('uploads');
+}
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, done) {
+      done(null, 'uploads/');
+    },
+    filename(req, file, done) {
+      const ext = path.extname(file.originalname);
+      done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 },
+});
+app.get('/upload', (req, res) => {
+  res.sendFile(path.join(__dirname, 'multipart.html'));
+});
+app.post('/upload', upload.single('image'), (req, res) => {
+  console.log(req.file);
+  res.send('ok');
 });
 
-app.post('/', (req, res) => {
-  res.send('hello express!');
-});
-
-app.use((req, res, next) => {
-  res.status(404).send('404 Not Found');
-});
-
+app.get(
+  '/',
+  (req, res, next) => {
+    console.log('GET / 요청에서만 실행됩니다.');
+    next();
+  },
+  (req, res) => {
+    throw new Error('에러는 에러 처리 미들웨어로 갑니다.');
+  }
+);
 app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(200).send('에러!!!!');
+  console.error(err);
+  res.status(500).send(err.message);
 });
 
 app.listen(app.get('port'), () => {
