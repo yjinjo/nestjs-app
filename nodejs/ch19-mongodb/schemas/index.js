@@ -1,16 +1,12 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-dotenv.config();
-
-MONGOOSE_ID = process.env.MONGOOSE_ID;
-MONGOOSE_PASSWORD = process.env.MONGOOSE_PASSWORD;
+require('dotev').config();
 
 const connect = () => {
   if (process.env.NODE_ENV !== 'production') {
     mongoose.set('debug', true);
   }
   mongoose.connect(
-    `mongodb://${MONGOOSE_ID}:${MONGOOSE_PASSWORD}@localhost:27017/admin`,
+    `mongodb://${process.env.MONGOOSE_ID}:${process.env.MONGOOSE_PASSWORD}@localhost:27017/admin`,
     {
       dbName: 'nodejs',
       useNewUrlParser: true,
