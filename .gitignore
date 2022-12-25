@@ -66,5 +66,6 @@ Temporary Items
 .code
 **/node_modules
 .env
+config.json
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,database
