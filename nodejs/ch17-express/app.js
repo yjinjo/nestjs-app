@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
@@ -11,12 +14,12 @@ app.use(morgan('dev'));
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser('zerochopassword'));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
     resave: false,
     saveUnintialized: false,
-    secret: 'zerochopassword',
+    secret: process.env.COOKIE_SECRET,
     cookie: {
       httpOnly: true,
       secure: false,
